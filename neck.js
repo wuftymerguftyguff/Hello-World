@@ -1,0 +1,30 @@
+var neckSize = document.getElementById('neck').offsetWidth;
+var distFromNut = 0;
+var scaleLength =  neckSize * 2.5; 
+var distFromBridge =  scaleLength;
+var fudgeFactor = 17.817;
+
+google.load("jquery", "1.5.2");
+google.setOnLoadCallback(function(){
+   $("a").click(function(event){
+	   pickNote();
+     alert("Thanks for visiting!");
+   });
+});
+
+for (numFret=1;numFret<=13;numFret=numFret+1)
+{
+var fretSize = distFromBridge / fudgeFactor;
+var div = document.getElementById('string-1-fret-' + numFret);
+div.style.width = fretSize + 'px';
+distFromNut = distFromNut + fretSize;
+//alert("Fret: " + numFret + " Dist From Bridge: " + distFromBridge );
+distFromBridge =  scaleLength - distFromNut;
+}
+
+function pickNote() {
+var randomstring=Math.floor(Math.random()*5) +1;
+var randomfret=Math.floor(Math.random()*12) +1;
+alert(randomstring);
+alert(randomfret);
+}

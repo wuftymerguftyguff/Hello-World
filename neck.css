@@ -1,0 +1,62 @@
+ #neck {
+    display: table;
+    width:100%;
+    }
+
+  .string  {
+    height: 44px;
+    display: table-row;
+    }
+
+  .fret {
+    display: table-cell;
+	text-align: center;
+        color: #ffffff;
+    }
+
+.string-6 {
+	background-image: url(/images/string6-fret.jpg);
+}
+
+.string-5 {
+	background-image: url(/images/string5-fret.jpg);
+}
+
+.string-4 {
+	background-image: url(/images/string4-fret.jpg);
+}
+
+.string-3 {
+	background-image: url(/images/string3-fret.jpg);
+}
+
+.string-2 {
+	background-image: url(/images/string2-fret.jpg);
+}
+
+.string-1 {
+	background-image: url(/images/string1-fret.jpg);
+}
+
+#string-6-fret-1 {
+        background-image: url(/images/string6-fret1.jpg);
+}
+#string-5-fret-1 {
+        background-image: url(/images/string5-fret1.jpg);
+}
+
+#string-4-fret-1 {
+        background-image: url(/images/string4-fret1.jpg);
+}
+
+#string-3-fret-1 {
+        background-image: url(/images/string3-fret1.jpg);
+}
+
+#string-2-fret-1 {
+        background-image: url(/images/string2-fret1.jpg);
+}
+
+#string-1-fret-1 {
+        background-image: url(/images/string1-fret1.jpg);
+}
