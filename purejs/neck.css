@@ -18,109 +18,109 @@
 }
 
 .string-6 {
-	background-image: url(/images/string6-fret.jpg);
+	background-image: url(../images/string6-fret.jpg);
 }
 
 .string-5 {
-	background-image: url(/images/string5-fret.jpg);
+	background-image: url(../images/string5-fret.jpg);
 }
 
 .string-4 {
-	background-image: url(/images/string4-fret.jpg);
+	background-image: url(../images/string4-fret.jpg);
 }
 
 .string-3 {
-	background-image: url(/images/string3-fret.jpg);
+	background-image: url(../images/string3-fret.jpg);
 }
 
 .string-2 {
-	background-image: url(/images/string2-fret.jpg);
+	background-image: url(../images/string2-fret.jpg);
 }
 
 .string-1 {
-	background-image: url(/images/string1-fret.jpg);
+	background-image: url(../images/string1-fret.jpg);
 }
 
 #string-6-fret-1 {
-        background-image: url(/images/string6-fret1.jpg);
+        background-image: url(../images/string6-fret1.jpg);
 }
 #string-5-fret-1 {
-        background-image: url(/images/string5-fret1.jpg);
+        background-image: url(../images/string5-fret1.jpg);
 }
 
 #string-4-fret-1 {
-        background-image: url(/images/string4-fret1.jpg);
+        background-image: url(../images/string4-fret1.jpg);
 }
 
 #string-3-fret-1 {
-        background-image: url(/images/string3-fret1.jpg);
+        background-image: url(../images/string3-fret1.jpg);
 }
 
 #string-2-fret-1 {
-        background-image: url(/images/string2-fret1.jpg);
+        background-image: url(../images/string2-fret1.jpg);
 }
 
 #string-1-fret-1 {
-        background-image: url(/images/string1-fret1.jpg);
+        background-image: url(../images/string1-fret1.jpg);
 }
 
 #string-3-fret-3 {
-        background-image: url(/images/string3-fret-onedot.jpg);
+        background-image: url(../images/string3-fret-onedot.jpg);
 	background-position: center center;
 }
 
 #string-4-fret-3 {
-        background-image: url(/images/string4-fret-onedot.jpg);
+        background-image: url(../images/string4-fret-onedot.jpg);
 	background-position: center center;
 }
 
 #string-3-fret-5 {
-        background-image: url(/images/string3-fret-onedot.jpg);
+        background-image: url(../images/string3-fret-onedot.jpg);
 	background-position: center center;
 }
 
 #string-4-fret-5 {
-        background-image: url(/images/string4-fret-onedot.jpg);
+        background-image: url(../images/string4-fret-onedot.jpg);
 	background-position: center center;
 }
 
 #string-3-fret-7 {
-        background-image: url(/images/string3-fret-onedot.jpg);
+        background-image: url(../images/string3-fret-onedot.jpg);
 	background-position: center center;
 }
 
 #string-4-fret-7 {
-        background-image: url(/images/string4-fret-onedot.jpg);
+        background-image: url(../images/string4-fret-onedot.jpg);
 	background-position: center center;
 }
 
 #string-3-fret-9 {
-        background-image: url(/images/string3-fret-onedot.jpg);
+        background-image: url(../images/string3-fret-onedot.jpg);
 	background-position: center center;
 }
 
 #string-4-fret-9 {
-        background-image: url(/images/string4-fret-onedot.jpg);
+        background-image: url(../images/string4-fret-onedot.jpg);
 	background-position: center center;
 }
 
 #string-6-fret-12 {
-        background-image: url(/images/string6-fret-twodots.jpg);
+        background-image: url(../images/string6-fret-twodots.jpg);
 	background-position: center center;
 }
 
 #string-5-fret-12 {
-        background-image: url(/images/string5-fret-twodots.jpg);
+        background-image: url(../images/string5-fret-twodots.jpg);
 	background-position: center center;
 }
 
 
 #string-2-fret-12 {
-        background-image: url(/images/string6-fret-twodots.jpg);
+        background-image: url(../images/string6-fret-twodots.jpg);
 	background-position: center center;
 }
 
 #string-1-fret-12 {
-        background-image: url(/images/string5-fret-twodots.jpg);
+        background-image: url(../images/string5-fret-twodots.jpg);
 	background-position: center center;
 }
