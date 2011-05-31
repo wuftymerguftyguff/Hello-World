@@ -1,0 +1,186 @@
+<html>
+<head>
+    <title>Test</title>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Google Data JS Client for Blogger.
+    google.load('gdata', '2.0');
+
+    	//Load Jquery
+    google.load("jquery", "1.6.1");
+    
+
+      /**
+       * Fades from one div to another, and calls the opt_callback method once
+       * the fade is done (if opt_callback exists).
+       * @param {Object} fromdiv The div to fade out.
+       * @param {Object} todiv The div to fade in.
+       * @param {Function} opt_callback Optional method to call once the fade is
+       *     done.
+       */
+      function transitionDiv(fromdiv, todiv, opt_callback) {
+        $('#' + fromdiv).fadeOut('fast', function() {
+          $('#' + todiv).fadeIn('fast', function() {
+            if (opt_callback) {
+              opt_callback();
+            }
+          });
+        });
+      }
+
+      /**
+       * Shows the "loading" div and logs the user out of the application.
+       * Reloads the page after the user has logged out.
+       */
+      function logout() {
+	      transitionDiv('divLoggedIn', 'divLoggingIn', function() {
+			      google.accounts.user.logout(scope);
+        });
+      }
+
+      /**
+       * Shows the "loading" div and then prompts the user to log in.
+       */
+      function login() {
+        transitionDiv('divLoggedOut', 'divLoggingIn', function() {
+          google.accounts.user.login(scope);
+        });
+      }
+
+      /**
+       * Error handler that gets called if there was an error loading the feed.
+       * The error message is displayed on the page.
+       */
+      function errorHandler(response) {
+        document.getElementById('divContent').innerHTML =
+            'ERROR: ' + response.message;
+        transitionDiv('divContentLoading', 'divContent');
+      }
+
+      /**
+       * Loads a feed from Blogger.
+       */
+      function loadData() {
+		var scope = 'http://docs.google.com/feeds/';  
+	    if (google.accounts.user.checkLogin(scope)) {  
+     	var service = new google.gdata.client.GoogleService('writely', 'DocList-App-v3.0');   
+     	service.getFeed(scope + 'default/private/full/?v=3', handleFeed, handleError);  
+	    } else {  
+     		var token = google.accounts.user.login(scope); // can ignore returned token  
+	    }
+      }
+      
+       var handleFeed = function(response) { 
+		   var entries = response.feed.entry;  
+		   if (!entries.length) {  
+			 alert('You have no entries!');  
+			 return;  
+		   }  
+		   var html = [];  
+		   for (var i = 0, entry; entry = entries[i]; i++) {  
+			 var title = entry.title.$t;  
+			 html.push('<li>' + title + '</li>');  
+		   }  
+		   document.getElementById('data1').innerHTML = html.join('');  
+	 };  
+	 
+	 var handleEntry = function(entryRoot){
+	 	alert('fuck create');
+	 }
+   
+	 var handleError = function(e) {  
+	   alert('Error: ' + e.cause ? e.cause.statusText : e.message);  
+	 };  
+
+      // This method checks the status of the user, and diplays the appropriate
+      // content area.
+      google.setOnLoadCallback(function() {
+        var status = google.accounts.user.getStatus();
+        if (status == google.accounts.AuthSubStatus.LOGGING_IN) {
+          // User is in the process of logging in, do nothing.
+          return;
+        } else if (status == google.accounts.AuthSubStatus.LOGGED_OUT) {
+          // User is logged out, display the "login" link.
+          transitionDiv('divLoggingIn', 'divLoggedOut');
+        } else {
+          // User is logged in, load the user's data.
+          transitionDiv('divLoggingIn', 'divLoggedIn', loadData);
+        }
+      });
+        
+      var scope = 'http://docs.google.com/feeds/';
+      //http://docs.google.com/feeds/documents/private/full/folder%3A0B8Cn1r1vaEllZmY0NWMwNWEtZWE3My00ZWY5LWJmNzMtNGE5ZTliODIwN2Fl
+      
+      function createFolder(){
+		var scope = 'http://docs.google.com/feeds/';  
+	    if (google.accounts.user.checkLogin(scope)) {  
+			alert('Fuck');   
+		 	var service = new google.gdata.client.GoogleService('writely', 'DocList-App-v1.0');   
+		 	var entry = new google.gdata.Entry();
+		 	var category = new google.gdata.atom.Category({
+		 		label:'folder',
+		 		scheme:'http://schemas.google.com/g/2005#kind',
+		 		term:'http://schemas.google.com/docs/2007#folder'
+		 	});
+		 	entry.addCategory(category);
+		 	var title = new google.gdata.atom.Text();
+		 	title.setText('Fuck this folder 2');
+		 	title.setType('text');
+		 	entry.setTitle(title);
+		 	service.insertEntry(scope + 'documents/private/full/', entry, handleEntry, handleError);
+     	}
+      }
+
+      function copyDocument()
+      {
+		var scope = 'http://docs.google.com/feeds/';  
+	    if (google.accounts.user.checkLogin(scope)) {  
+		 	var service = new google.gdata.client.GoogleService('writely', 'DocList-App-v3.0');   
+		 	var entry = new google.gdata.Entry({
+		 		id: new google.gdata.atom.Id({
+		 			value: 'http://docs.google.com/feeds/default/private/full/document%3A1GfUGJAS--ptYWfop1LuTEgL_vCgA63ugBFdXH5T_hfE'
+		 		}),
+		 		title: new google.gdata.atom.Text({
+		 			text: 'Copy of document',
+		 			type: 'text'
+		 		})
+		 	});
+		 	service.insertEntry(scope + 'default/private/full/?v=3', entry, handleEntry, handleError);
+     	}
+	  }
+
+
+    </script>
+  </head>
+  <body>
+
+    <h2>Example: AuthSubJS with JQuery</h2>
+    <div id="container">
+    <div id="divLoggingIn">
+      <img src="loading.gif" height="32" width="32" style="display: none;"/>
+    </div>
+    <div id="divLoggedOut" style="display: none;">
+     <button onclick="login();">Login</button>
+
+    </div>
+    <div id="divLoggedIn" style="display: none;">
+      <button onclick="logout();">Logout</button>
+      <br /><br />
+      <div id="divContentLoading">
+        <img src="loading.gif" height="32" width="32" />
+      </div>
+      <div id="divContent" style="display: none; text-align: left;">
+
+      </div>
+
+    </div>
+    </div>
+    <button onclick="createFolder();">Ceate Folder</button>
+    <button onclick="copyDocument();">Copy Document</button>
+	<div id="data1"><!-- dynamically filled --></div>
+  </body>
+
+</html>
+
+
