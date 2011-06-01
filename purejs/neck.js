@@ -108,9 +108,9 @@ function drawFretboard() {
 			$(fretContainer).addClass("fret");
 			$(fretContainer).addClass("string-" + numString);
 			$(fretContainer).addClass("fret-" + numFret);
-			var imgTag = createDOMElement('img');
-			imgTag.setAttribute('href', '/images/string' + numString +  '-fret.jpg');
-			$(fretContainer).append(imgTag);
+//			var imgTag = createDOMElement('img');
+//			imgTag.setAttribute('href', '../images/string' + numString +  '-fret.jpg');
+//			$(fretContainer).append(imgTag);
 			$(fretContainer).data("neck", { string: numString, fret: numFret });
 			
 
