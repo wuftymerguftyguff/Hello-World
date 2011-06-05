@@ -1,0 +1,98 @@
+<html>
+<head>
+    <title>Test</title>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+	    var scope = 'http://docs.google.com/feeds/';
+	    //var scope = 'http://www.google.com/calendar/feeds/';
+	var resultsSheetName = "LearnTheNeck.com - Results";
+//	scope = 'http://spreadsheets.google.com/feeds/%20http://docs.google.com/feeds/';
+//	scope = encodeURI(scope);
+
+      // Load the Google Data JS Client for Blogger.
+    google.load('gdata', '2.0');
+
+    function logMeIn(scope) {
+	  var token = google.accounts.user.login(scope);
+	}
+
+	function handleInfo(data) {
+	    var response = eval(data.currentTarget.responseText);
+	    alert('Target: ' + response.Target + "\n" +
+		  'Scope: ' + response.Scope + "\n" +
+		  'Secure: ' + response.Secure);
+	}
+
+	function doGetInfo(scope) {
+	if (google.accounts.user.checkLogin(scope)) {
+	    google.accounts.user.getInfo(handleInfo);
+	  }
+	}
+
+
+	function checkOAuth(scope) {
+	    var token = google.accounts.user.checkLogin(scope);
+	    alert(token);
+	}
+
+	function logMeOut() {
+	  google.accounts.user.logout();
+	}
+
+function getResults() {
+	    		var scope = 'http://docs.google.com/feeds/';
+			if (google.accounts.user.checkLogin(scope)) {  
+			var service = new google.gdata.client.GoogleService('writely', 'DocList-App-v3.0');  
+			var feedurl = 'http://docs.google.com/feeds/default/private/full/-/spreadsheet/?v=3';
+			//var feedurl = 'http://docs.google.com/feeds/default/private/full/-/spreadsheet/?v=3&title-exact=true&title=' + resultsSheetName;
+		    service.getFeed(feedurl, handleFeed, handleError);  
+	    }
+	}
+      
+		var handleFeed = function(response) { 
+		   var entries = response.feed.entry;  
+		   if (!response.feed.entry) {  
+			 createSheet();
+			 return;  
+		   }  
+		   for (var i = 0, entry; entry = entries[i]; i++) {  
+			   var title = entry.title.$t;
+			   resultSheetID = entry.id.$t;
+			   if (title == resultsSheetName) {
+				   alert("we have our sheet! ");
+			   }
+		   }  
+		};  
+
+      /**
+       * Error handler that gets called if there was an error loading the feed.
+       * The error message is displayed on the page.
+       */
+      function errorHandler(response) {
+	alert(response.message);
+      }
+
+function handleError(e) {
+  alert("There was an error!");
+  alert(e.cause ? e.cause.statusText : e.message);
+}
+
+
+
+    </script>
+  </head>
+  <body>
+    <h2>Example: OAuth test</h2>
+    <button onclick="logMeIn(scope);">login</button>
+    <button onclick="checkOAuth(scope);">check login</button>
+    <button onclick="doGetInfo(scope);">debug login</button>
+    <button onclick="getResults(scope);">Look For Sheet</button>
+    <button onclick="logMeOut();">logout</button>
+    <img src="/images/string1-fret.jpg">
+	<div id="data1"><!-- dynamically filled --></div>
+  </body>
+
+</html>
+
+
