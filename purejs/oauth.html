@@ -58,9 +58,10 @@ function getResults() {
 		   }  
 		   for (var i = 0, entry; entry = entries[i]; i++) {  
 			   var title = entry.title.$t;
-			   resultSheetID = entry.id.$t;
 			   if (title == resultsSheetName) {
-				   alert("we have our sheet! ");
+			//	   alert("we have our sheet! ");
+				   var dummy = entry.gd$resourceId.$t.split(':');
+				   resultSheetID = dummy[1];
 			   }
 		   }  
 		};  
@@ -78,6 +79,45 @@ function handleError(e) {
   alert(e.cause ? e.cause.statusText : e.message);
 }
 
+ function createSheet(){
+		var scope = 'http://docs.google.com/feeds/';  
+	    if (google.accounts.user.checkLogin(scope)) {  
+		 	var service = new google.gdata.client.GoogleService('writely', 'DocList-App-v3.0');   
+		 	var entry = new google.gdata.Entry();
+		 	var category = new google.gdata.atom.Category({
+		 		label:'spreadsheet',
+		 		scheme:'http://schemas.google.com/g/2005#kind',
+		 		term:'http://schemas.google.com/docs/2007#spreadsheet'
+		 	});
+		 	entry.addCategory(category);
+		 	var title = new google.gdata.atom.Text();
+		 	title.setText(resultsSheetName);
+		 	title.setType('text');
+		 	entry.setTitle(title);
+		 	service.insertEntry(scope + 'documents/private/full/', entry, handleEntry, handleError);
+     	}
+ }
+	 var handleEntry = function(entryRoot){
+	 	alert('Results Spreadsheet: ' + resultsSheetName + ' Created');
+	 }
+
+	 var handleError = function(e) {  
+	   alert('Error: ' + e.cause ? e.cause.statusText : e.message);  
+	 }  
+
+function appendRow() {
+	var scope = 'http://spreadsheets.google.com/feeds/';  
+	    if (google.accounts.user.checkLogin(scope)) {  
+		 	var service = new google.gdata.client.GoogleService('wise', 'SpreadSheet-App-v3.0');   
+			var entry = new google.gdata.Entry();
+			entry.xmlns$gsx='http://schemas.google.com/spreadsheets/2006/extended';
+			var SheetURI = encodeURI(scope + 'list/' + resultSheetID + '/2/private/full');
+			ent = new google.gdata.ExtendedProperty();
+			ent.$t = "wee";
+			entry.gsx$title = ent;
+		 	service.insertEntry(SheetURI , entry, handleEntry, handleError);
+     	}
+}
 
 
     </script>
@@ -88,6 +128,8 @@ function handleError(e) {
     <button onclick="checkOAuth(scope);">check login</button>
     <button onclick="doGetInfo(scope);">debug login</button>
     <button onclick="getResults(scope);">Look For Sheet</button>
+    <button onclick="createSheet(scope);">Create Sheet</button>
+    <button onclick="appendRow(scope);">Append Row</button>
     <button onclick="logMeOut();">logout</button>
     <img src="/images/string1-fret.jpg">
 	<div id="data1"><!-- dynamically filled --></div>
